@@ -9,4 +9,9 @@ steps:
     entrypoint: make
     args: [test]
 
+  - id: lint
+    name: golang:1.22
+    entrypoint: make
+    args: [lint]
+
 timeout: 1800s
