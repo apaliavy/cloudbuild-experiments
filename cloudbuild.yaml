@@ -1,0 +1,17 @@
+options:
+  env:
+    - GO111MODULE=on
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - id: test
+    name: golang:1.22
+    entrypoint: make
+    args: [test]
+
+  - id: lint
+    name: golang:1.22
+    entrypoint: make
+    args: [lint]
+
+timeout: 1800s

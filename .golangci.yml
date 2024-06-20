@@ -1,0 +1,47 @@
+run:
+  tests: false
+  timeout: 5m
+
+linters:
+  enable:
+    - govet
+    - errcheck
+    - staticcheck
+    - gosimple
+    - ineffassign
+    - gofmt
+    - goimports
+    - misspell
+    - unused
+
+linters-settings:
+  gofmt:
+    simplifications: true
+  goimports:
+    local-prefixes: github.com/your/repo
+  misspell:
+    locale: US
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+  govet:
+    shadowing: true
+
+issues:
+  exclude-dirs:
+    - vendor
+    - /usr/local/go
+    - examples
+  exclude-files:
+    - generated_.*\.go
+    - .*_test\.go
+    - .*ignore\.go
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - errcheck
+    - linters:
+        - golint
+      text: "should have comment or be unexported"
+    - path: .*/example/.*\.go
+      text: "String not declared by package unsafe"
