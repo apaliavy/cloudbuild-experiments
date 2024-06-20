@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("%d Simple Calculator")
+	fmt.Println("Simple Calculator")
 	result, err := Calculate(2, 3, "+")
 	if err != nil {
 		fmt.Println("Error:", err)
