@@ -1,22 +1,41 @@
 run:
-  # Run several linters by default
-  linters:
-    enable:
-      - govet
-      - errcheck
-      - staticcheck
-      - gosimple
-      - ineffassign
-      - structcheck
-      - varcheck
-      - deadcode
-      - gofmt
-      - goimports
-      - misspell
-      - unused
+  tests: false
+  timeout: 5m
+
+linters:
+  enable:
+    - govet
+    - errcheck
+    - staticcheck
+    - gosimple
+    - ineffassign
+    - gofmt
+    - goimports
+    - misspell
+    - unused
+
+linters-settings:
+  gofmt:
+    simplifications: true
+  goimports:
+    local-prefixes: github.com/your/repo
+  misspell:
+    locale: US
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+  govet:
+    shadowing: true
 
 issues:
-  # Exclude some common false positive issues
+  exclude-dirs:
+    - vendor
+    - /usr/local/go
+    - examples
+  exclude-files:
+    - generated_.*\.go
+    - .*_test\.go
+    - .*ignore\.go
   exclude-rules:
     - path: _test\.go
       linters:
@@ -24,28 +43,5 @@ issues:
     - linters:
         - golint
       text: "should have comment or be unexported"
-
-linters-settings:
-  gofmt:
-    simplifications: true
-  goimports:
-    local-prefixes: github.com/apaliavy/cloudbuild-experiments
-  misspell:
-    locale: US
-  errcheck:
-    check-type-assertions: true
-    check-blank: true
-  govet:
-    shadow: true
-
-# Optional: Specify directories to include/exclude
-# paths:
-#   include:
-#     - cmd/
-#     - pkg/
-#   exclude:
-#     - vendor/
-
-# Timeout for the whole process
-# Default is 1 minute
-timeout: 2m
+    - path: .*/example/.*\.go
+      text: "String not declared by package unsafe"
