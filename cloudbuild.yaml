@@ -1,0 +1,12 @@
+options:
+  env:
+    - GO111MODULE=on
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  - id: test
+    name: alpine
+    entrypoint: make
+    args: [test]
+
+timeout: 1800s
