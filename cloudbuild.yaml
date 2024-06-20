@@ -5,7 +5,7 @@ options:
 
 steps:
   - id: test
-    name: alpine
+    name: golang:1.22
     entrypoint: make
     args: [test]
 
